@@ -1,0 +1,239 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+PYMANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Project specific
+# Vector database
+chroma_db/
+*.db
+*.sqlite
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# JAR files (optional - you might want to track some)
+# sources/*.jar
+
+# Logs
+logs/
+*.log
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# SSL certificates
+ssl/
+*.pem
+*.key
+*.crt
+
+# Backup files
+*.bak
+*.backup
+
+# IDE files
+*.swp
+*.swo
+*~
+
+# Local configuration overrides
+local_config.py
+config_local.py
+
+# Test outputs
+test_output/
+test_results/
+
+# Performance profiling
+*.prof
+*.profile
+
+# Memory dumps
+*.hprof
+*.dump
+
+# Large model files
+*.bin
+*.safetensors
+models/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/
+
+# MLflow
+mlruns/
+
+# Weights & Biases
+wandb/
+
+# Experiment tracking
+experiments/
+runs/
+
+# Cache directories
+.cache/
+cache/
+
+# Node.js (if you add any frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local development
+dev_*.py
+test_*.py
+debug_*.py
+scratch_*.py
+
+.AddCompLib/
+src/sources/

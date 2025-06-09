@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaRAG - Java代码知识库</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fab fa-java"></i> JavaRAG</h1>
+                <p>Java代码知识库RAG系统</p>
+                <div class="system-status">
+                    <div class="status-item">
+                        <i class="fas fa-database"></i>
+                        <span id="dbStatus">检查中...</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-robot"></i>
+                        <span id="aiStatus">检查中...</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-file-archive"></i>
+                        <span id="fileCount">0</span> 文件
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-layout">
+            <!-- 左侧文件管理面板 -->
+            <aside class="file-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-folder-open"></i> 文件管理</h2>
+                    <button class="btn btn-primary" id="uploadBtn">
+                        <i class="fas fa-plus"></i> 添加JAR
+                    </button>
+                </div>
+
+                <!-- 文件上传区域 -->
+                <div class="upload-section" id="uploadSection" style="display: none;">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>拖拽JAR文件到此处或点击选择</p>
+                            <input type="file" id="fileInput" accept=".jar" multiple style="display: none;">
+                            <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">
+                                选择文件
+                            </button>
+                        </div>
+                    </div>
+                    <div class="upload-progress" id="uploadProgress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p id="progressText">上传中...</p>
+                    </div>
+                </div>
+
+                <!-- JAR文件列表 -->
+                <div class="jar-list">
+                    <div class="list-header">
+                        <span>JAR文件</span>
+                        <span>状态</span>
+                        <span>操作</span>
+                    </div>
+                    <div class="jar-items" id="jarItems">
+                        <!-- JAR文件项将通过JavaScript动态添加 -->
+                    </div>
+                </div>
+
+                <!-- 统计信息 -->
+                <div class="stats-panel">
+                    <h3><i class="fas fa-chart-bar"></i> 统计信息</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">总代码块</span>
+                            <span class="stat-value" id="totalChunks">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">数据库大小</span>
+                            <span class="stat-value" id="dbSize">0 MB</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右侧搜索面板 -->
+            <section class="search-panel">
+                <!-- 智能查询区域 -->
+                <div class="query-section">
+                    <h2><i class="fas fa-brain"></i> 智能查询</h2>
+                    <div class="query-form">
+                        <div class="input-group">
+                            <input type="text" id="queryInput" placeholder="请输入您的问题，例如：如何使用HashMap？">
+                            <button class="btn btn-primary" id="queryBtn">
+                                <i class="fas fa-paper-plane"></i> 查询
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 查询结果 -->
+                    <div class="results-container" id="resultsContainer" style="display: none;">
+                        <h3>查询结果</h3>
+                        <div class="result-content" id="resultContent"></div>
+                    </div>
+                </div>
+
+                <!-- 代码搜索区域 -->
+                <div class="search-section">
+                    <h2><i class="fas fa-search"></i> 代码搜索</h2>
+                    <div class="search-form">
+                        <div class="input-group">
+                            <input type="text" id="searchInput" placeholder="搜索代码片段，例如：ArrayList implementation">
+                            <button class="btn btn-secondary" id="searchBtn">
+                                <i class="fas fa-search"></i> 搜索
+                            </button>
+                        </div>
+                        <div class="search-filters">
+                            <select id="jarFilter">
+                                <option value="">所有JAR文件</option>
+                                <!-- 选项将通过JavaScript动态添加 -->
+                            </select>
+                            <select id="typeFilter">
+                                <option value="">所有类型</option>
+                                <option value="class">类</option>
+                                <option value="method">方法</option>
+                                <option value="field">字段</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- 搜索结果 -->
+                    <div class="search-results" id="searchResults" style="display: none;">
+                        <h3>搜索结果</h3>
+                        <div class="code-results" id="codeResults"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 底部信息 -->
+        <footer class="footer">
+            <p>&copy; 2024 JavaRAG. Powered by RAG Technology.</p>
+        </footer>
+    </div>
+
+    <!-- 加载提示 -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>处理中...</p>
+        </div>
+    </div>
+
+    <!-- 确认对话框 -->
+    <div class="modal-overlay" id="modalOverlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">确认操作</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">确定要执行此操作吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCancel">取消</button>
+                <button class="btn btn-danger" id="modalConfirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/app.js"></script>
+</body>
+</html>
